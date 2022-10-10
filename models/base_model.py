@@ -19,7 +19,7 @@ class BaseModel:
         self.created_at = datetime.datetime.now()
         self.updated_at = self.created_at
 
-    def __str___(self):
+    def __str__(self):
         """
         Returns a string representation of BaseModel
         """
