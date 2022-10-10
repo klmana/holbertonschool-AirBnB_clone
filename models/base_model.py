@@ -4,20 +4,29 @@ Module containing "Base" class.
 """
 
 import uuid
-import datetime
+from datetime import datetime
 
 
 class BaseModel:
     """
     The base model class.
     """
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         Constructs a BaseModel class.
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = self.created_at
+        dateformat = "%Y-%m-%dT%H:%M:%S.%f"
+
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    self.__dict__[key] = datetime.strptime(value, dateformat)
+                elif key != "__class__":
+                    self.__dict__[key] = value
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
 
     def __str__(self):
         """
@@ -30,7 +39,7 @@ class BaseModel:
         Updates public instance attribute updated_at
         with current datetime
         """
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         """
