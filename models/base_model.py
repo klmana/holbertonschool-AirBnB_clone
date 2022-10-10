@@ -51,8 +51,15 @@ class BaseModel:
         of __dict__
         """
         new_dict = {}
-        new_dict = self.__dict__.copy()
         new_dict["__class__"] = self.__class__.__name__
-        new_dict["created_at"] = self.updated_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
+        for key, value in self.__dict__.items():
+            if type(value) is datetime:
+                new_dict[key] = value.isoformat()
+            else:
+                new_dict[key] = value
+#        new_dict = self.__dict__.copy()
+#        new_dict["__class__"] = self.__class__.__name__
+#        new_dict["created_at"] = self.updated_at.isoformat()
+#        if "updated_at" in new_dict:
+#            new_dict["updated_at"] = self.updated_at.isoformat()
         return new_dict
