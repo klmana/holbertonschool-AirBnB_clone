@@ -44,5 +44,5 @@ class FileStorage:
         with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
             new_dict = json.load(f)
             new_dict = {k: self.classes()[v["__class__"]](**v)
-                        for k, v in obj_dict.items()}
-            FileStorage.__objects = obj_dict
+                        for k, v in new_dict.items()}
+            FileStorage.__objects = new_dict
