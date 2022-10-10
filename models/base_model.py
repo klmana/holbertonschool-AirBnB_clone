@@ -7,6 +7,8 @@ import uuid
 from datetime import datetime
 import models
 
+iso_format = "%Y-%m-%dT%H:%M:%S.%f"
+
 
 class BaseModel:
     """
@@ -16,12 +18,11 @@ class BaseModel:
         """
         Constructs a BaseModel class.
         """
-        dateformat = "%Y-%m-%dT%H:%M:%S.%f"
 
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = datetime.strptime(value, dateformat)
+                    self.__dict__[key] = datetime.strptime(value, iso_format)
                 elif key != "__class__":
                     self.__dict__[key] = value
         else:
@@ -52,6 +53,6 @@ class BaseModel:
         new_dict = {}
         new_dict = self.__dict__
         new_dict["__class__"] = self.__class__.__name__
-        new_dict["created_at"] = new_dict["created_at"].isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
+        new_dict["created_at"] = self.created_at.strftime(iso_format)
+        new_dict["updated_at"] = self.updated_at.strftime(iso_format)
         return new_dict
