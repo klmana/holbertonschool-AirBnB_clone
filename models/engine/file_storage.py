@@ -2,8 +2,11 @@
 """
   File Storage
 """
-import os
+
+from os.path import exists
 import json
+from models.base_model import BaseModel
+
 
 class FileStorage:
 
@@ -18,28 +21,31 @@ class FileStorage:
         """
         Returns the  __objects dictionary.
         """
-        return FileStorage.__objects
+        return self.__objects
 
     def new(self, obj):
         """
         Sets in __objects the obj with key <obj class name>.id
         """
-        key = "{}.{}".format(type(obj).__name__, obj.id)
-        FileStorage.__objects[key] = obj
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
         """
         Serialzes __objects to JSON file.
         """
-        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
-            json.dump(d, f)
+        j_objects = {}
+        for key in self.__objects:
+            j_objects[key] = self.__objects[key].to_dict()
+        with open(self.__file_path, "w", encoding="utf-8") as f:
+            json.dump(j_objects, f)
 
     def reload(self):
         """
         Deserializes the JSON file into __objects.
         """
-        if not os.path.isfile(FileStorage.__file_path):
-            return
-        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
-            new_dict = json.load(f)
+        if exists(self.__file_path):
+            with open(self.__file_path, "r", encoding="utf-8") as f:
+                j_objects = json.load(f)
+                for key in j_objects:
+                    self.__objects[key] = BaseModel(**j_objects[key])
