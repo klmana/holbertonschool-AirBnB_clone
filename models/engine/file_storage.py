@@ -42,7 +42,7 @@ class FileStorage:
         if not os.path.isfile(FileStorage.__file_path):
             return
         with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
-            obj_dict = json.load(f)
-            obj_dict = {k: self.classes()[v["__class__"]](**v)
+            new_dict = json.load(f)
+            new_dict = {k: self.classes()[v["__class__"]](**v)
                         for k, v in obj_dict.items()}
             FileStorage.__objects = obj_dict
