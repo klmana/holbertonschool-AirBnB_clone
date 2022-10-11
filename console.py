@@ -9,7 +9,7 @@
 
 import cmd
 import sys
-
+from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     """Contains command prompts for HBNB program's intepreter."""
@@ -28,6 +28,19 @@ class HBNBCommand(cmd.Cmd):
         """Empty line - does nothing."""
         pass
 
+    def do_create(self, arg):
+        """Creates a new instance of BaseModel."""
+        if len(arg) == "":
+            print("** class name missing **")
+            return False
+        else:
+            print("** class doesn't exist **")
+            return False
+
+    def do_show(self, arg):
+        """Prints the string representation of an instance
+        \based on the class name and id."""
+        
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
