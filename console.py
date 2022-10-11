@@ -31,11 +31,12 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel."""
-        if len(sys.argv) == 2:
+        args = arg.split()
+        if len(args) == 0:
             print("** class name missing **")
             return False
-        elif sys.argv[2] in classes:
-            new_inst = (sys.argv[2])()
+        elif args[0] in classes:
+            new_inst = args[0]()
         else:
             print("** class doesn't exist **")
             return False
@@ -47,12 +48,13 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation of an instance
         based on the class name and id.
         """
-        if len(sys.argv) == 2:
+        args = arg.split()
+        if len(args) == 0:
             print("** class name missing **")
             return False
-        elif sys.argv[2] in classes:
-            if len(sys.argv) > 3:
-                key = sys.argv[2] + "." + sys.argv[3]
+        elif args[0] in classes:
+            if len(args) > 1:
+                key = args[0] + "." + args[1]
                 if key in models.storage.all():
                     print(models.storage.all()[key])
                 else:
@@ -64,6 +66,3 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
             return False
-
-#    def do_destroy(self, arg):
-#        """
