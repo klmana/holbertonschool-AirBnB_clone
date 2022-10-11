@@ -7,6 +7,7 @@
 
 import cmd
 import sys
+import models
 from models.base_model import BaseModel
 
 classes = {"BaseModel": BaseModel}
@@ -57,6 +58,32 @@ class HBNBCommand(cmd.Cmd):
                 key = args[0] + "." + args[1]
                 if key in models.storage.all():
                     print(models.storage.all()[key])
+                else:
+                    print("** no instance found **")
+                    return False
+            else:
+                print("** instance id missing **")
+                return False
+        else:
+            print("** class doesn't exist **")
+            return False
+
+    def do_destroy(self, arg):
+        """
+        Deletes an instance based upon
+        class name and id, with changes saved
+        to JSON file.
+        """
+        args = arg.split()
+        if len(args) == 0:
+            print("** class name missing **")
+            return False
+        elif args[0] in classes:
+            if len(args) > 1:
+                key = args[0] + "." + args[1]
+                if key in models.storage.all():
+                    del(storage[key])
+                    models.storage.save()
                 else:
                     print("** no instance found **")
                     return False
