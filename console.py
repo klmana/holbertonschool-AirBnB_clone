@@ -82,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
             if len(args) > 1:
                 key = args[0] + "." + args[1]
                 if key in models.storage.all():
-                    del(storage[key])
+                    del(models.storage.all()[key])
                     models.storage.save()
                 else:
                     print("** no instance found **")
