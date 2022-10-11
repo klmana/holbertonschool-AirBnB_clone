@@ -1,4 +1,15 @@
 #!/usr/bin/python3
 """
-  User method
+  The User class.
 """
+
+
+from models.base_model import BaseModel
+
+
+class User(BaseModel):
+    """Constructs a User."""
+    email = ""
+    password = ""
+    first_name = ""
+    last_name = ""
