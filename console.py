@@ -31,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel."""
-        if len(sys.argv) == 1:
+        if len(sys.argv) < 2:
             print("** class name missing **")
             return False
         if sys.argv[1] in classes:
@@ -45,7 +45,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """Prints the string representation of an instance
         \based on the class name and id."""
-        if len(sys.argv) == 1:
+        if len(sys.argv) < 2:
             print("** class name missing **")
             return False
         if sys.argv[1] in classes:
