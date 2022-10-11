@@ -12,7 +12,6 @@ import sys
 from models.base_model import BaseModel
 classes = {"BaseModel": BaseModel}
 
-
 class HBNBCommand(cmd.Cmd):
     """Contains command prompts for HBNB program's intepreter."""
     prompt = "(hbnb)"
@@ -42,12 +41,17 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """Prints the string representation of an instance
         \based on the class name and id."""
-        if sys.argc < 2:
-            print("** class name missing **")
-            return False
-        if sys.argv[1] not in classes:
+        if sys.argv[1] in classes:
+            if sys.argc > 2:
+                key = sys.argv[1] + "." + sys.argv[2]
+                if key in models.storage.all():
+                    print(models.storage.all()[key])
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
             print("** class doesn't exist **")
-            return False
 
 
 if __name__ == '__main__':
