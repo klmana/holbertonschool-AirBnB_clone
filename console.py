@@ -10,6 +10,8 @@
 import cmd
 import sys
 from models.base_model import BaseModel
+classes = {"BaseModel": BaseModel}
+
 
 class HBNBCommand(cmd.Cmd):
     """Contains command prompts for HBNB program's intepreter."""
@@ -40,7 +42,13 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """Prints the string representation of an instance
         \based on the class name and id."""
-        
+        if sys.argc < 2:
+            print("** class name missing **")
+            return False
+        if sys.argv[1] not in classes:
+            print("** class doesn't exist **")
+            return False
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
