@@ -31,28 +31,34 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel."""
-        if len(arg) == "":
+        if len(sys.argv) == 1:
             print("** class name missing **")
             return False
+        if sys.argv[1] in classes:
+            new_inst = (sys.argv[1])()
         else:
             print("** class doesn't exist **")
             return False
+        print(new_inst.id)
+        new_inst.save()
 
     def do_show(self, arg):
         """Prints the string representation of an instance
         \based on the class name and id."""
+        if len(sys.argv) == 1:
+            print("** class name missing **")
+            return False
         if sys.argv[1] in classes:
-            if sys.argc > 2:
+            if len(sys.argv) > 2:
                 key = sys.argv[1] + "." + sys.argv[2]
                 if key in models.storage.all():
                     print(models.storage.all()[key])
                 else:
                     print("** no instance found **")
+                    return False
             else:
                 print("** instance id missing **")
+                return False
         else:
             print("** class doesn't exist **")
-
-
-if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+            return False
