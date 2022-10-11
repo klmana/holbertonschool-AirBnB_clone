@@ -20,12 +20,13 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, arg):
-        """EOF command -  exits the program."""
+        """EOF command - Crtl-D to exit the program."""
+        print()
         return True
 
-    def empty_line(self):
-        """Empty line - executes nothing."""
-        return
+    def emptyline(self):
+        """Empty line - does nothing."""
+        pass
 
 
 if __name__ == '__main__':
