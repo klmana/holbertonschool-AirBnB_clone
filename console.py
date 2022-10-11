@@ -65,5 +65,5 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return False
 
-    def do_destroy(self, arg):
-        """
+#    def do_destroy(self, arg):
+#        """
