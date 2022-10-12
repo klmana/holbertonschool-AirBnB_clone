@@ -102,9 +102,9 @@ class HBNBCommand(cmd.Cmd):
             return False
 
         def do_all(self, arg):
-        """
-        Prints all string representations of instances
-        """
+            """
+            Prints all string representations of instances
+            """
         o_list = []
         args = arg.split()
         if len(args) == 0:
@@ -119,6 +119,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
                 return False
+
     def do_update(self, arg):
         """
         Updates an instance
@@ -147,6 +148,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** no instance found **")
             return False
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
