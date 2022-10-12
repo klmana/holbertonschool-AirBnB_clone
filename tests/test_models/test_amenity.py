@@ -11,7 +11,7 @@ from models.base_model import BaseModel
 from models.amenity import Amenity
 
 
-class TestDocsAmenity(unittest.Testcase):
+class TestDocsAmenity(unittest.TestCase):
     """Tests for the Amenity's docs."""
 
     @classmethod

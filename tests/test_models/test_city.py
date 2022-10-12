@@ -11,7 +11,7 @@ from models.base_model import BaseModel
 from models.city import City
 
 
-class TestDocsCity(unittest.Testcase):
+class TestDocsCity(unittest.TestCase):
     """Tests for the City's docs."""
 
     @classmethod

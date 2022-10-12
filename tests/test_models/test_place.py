@@ -11,7 +11,7 @@ from models.base_model import BaseModel
 from models.place import Place
 
 
-class TestDocsPlace(unittest.Testcase):
+class TestDocsPlace(unittest.TestCase):
     """Tests for the Place's docs."""
 
     @classmethod

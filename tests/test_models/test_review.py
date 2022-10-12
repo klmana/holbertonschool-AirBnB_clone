@@ -11,7 +11,7 @@ from models.base_model import BaseModel
 from models.review import Review
 
 
-class TestDocsReview(unittest.Testcase):
+class TestDocsReview(unittest.TestCase):
     """Tests for the Review's docs."""
 
     @classmethod

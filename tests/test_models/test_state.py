@@ -11,7 +11,7 @@ from models.base_model import BaseModel
 from models.state import State
 
 
-class TestDocsState(unittest.Testcase):
+class TestDocsState(unittest.TestCase):
     """Tests for the State's docs."""
 
     @classmethod
