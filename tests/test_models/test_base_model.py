@@ -6,6 +6,8 @@ import unittest
 import datetime
 import uuid
 import inspect
+import models
+
 from models import base_model
 BaseModel = base_model.BaseModel
 
@@ -48,8 +50,4 @@ class TestDocsBaseModel(unittest.TestCase):
 
 class TestBaseModel(unittest.TestCase):
     """Tests class functionality."""
-
-    def test_str(self):
-        """Tests that __str__ is functioning normally."""
-        self.assertEqual(self.__str__(), '[BaseModel]')
 # INCOMPLETE
