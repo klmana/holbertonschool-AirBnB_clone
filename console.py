@@ -135,8 +135,8 @@ class HBNBCommand(cmd.Cmd):
             return False
         key = args[0] + "." + args[1]
         if key in models.storage.all():
-            setattr(models.storage.all()[key], arg[2], arg[3])
-            models.storage.all()[key].save()
+            setattr(models.storage.new()[key], arg[2], arg[3])
+            models.storage.save()
         else:
             print("** no instance found **")
             return False
