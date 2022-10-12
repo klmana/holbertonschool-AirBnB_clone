@@ -53,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 0:
             print("** class name missing **")
             return False
-        elif args[0]  in classes:
+        elif args[0] in classes:
             if len(args) > 1:
                 key = args[0] + "." + args[1]
                 if key in models.storage.all():
