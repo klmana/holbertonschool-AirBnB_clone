@@ -12,6 +12,7 @@ from models import storage
 import re
 import json
 import os
+import models
 FileStorage = file_storage.FileStorage
 
 
