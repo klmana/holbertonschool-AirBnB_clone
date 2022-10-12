@@ -6,6 +6,7 @@ import unittest
 import datetime
 import uuid
 import inspect
+import models
 
 from models.base_model import BaseModel
 from models.state import State
@@ -41,7 +42,3 @@ class TestDocsState(unittest.TestCase):
 
 class TestState(unittest.TestCase):
     """Tests class functionality."""
-
-    def test_str(self):
-        """Tests that __str__ is functioning normally."""
-        self.assertEqual(self.__str__(), '[State]')

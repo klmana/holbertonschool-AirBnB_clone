@@ -6,6 +6,7 @@ import unittest
 import datetime
 import uuid
 import inspect
+import models
 
 from models.base_model import BaseModel
 from models.user import User
@@ -41,7 +42,3 @@ class TestDocsUser(unittest.TestCase):
 
 class TestUser(unittest.TestCase):
     """Tests class functionality."""
-
-    def test_str(self):
-        """Tests that __str__ is functioning normally."""
-        self.assertEqual(self.__str__(), '[User]')
