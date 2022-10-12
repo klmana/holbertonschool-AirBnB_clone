@@ -101,10 +101,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return False
 
-        def do_all(self, arg):
-            """
-            Prints all string representations of instances
-            """
+    def do_all(self, arg):
+        """
+        Prints all string representations of instances
+        """
         o_list = []
         args = arg.split()
         if len(args) == 0:
