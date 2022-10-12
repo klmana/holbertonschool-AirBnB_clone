@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-  The Console program.
-  Contains the entry point of the command interpreter.
+The Console program.
+Contains the entry point of the command interpreter.
 """
 
 
