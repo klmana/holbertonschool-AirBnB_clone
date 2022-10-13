@@ -39,6 +39,7 @@ Non-interactive mode example
 ```bash
 $ echo "help" | ./console.py
 (hbnb)
+```
 
 ## Testing :bomb:
 
