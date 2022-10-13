@@ -11,8 +11,18 @@ This first step consists of a custom command-line interface for data management,
 
 ## Compilation / Installation :wrench:
 
+Clone this repository
+```bash
 
+git clone {repository}
+```
 
+Run the console
+```bash
+./console.py
+```
+
+Run any of the allowed commands (see table below)
 
 
 ## Requirements :raising_hand:
