@@ -132,7 +132,8 @@ class HBNBCommand(cmd.Cmd):
                 if key in models.storage.all():
                     if len(args) > 2:
                         if len(args) > 3:
-                            setattr(models.storage.all()[key], args[2], args[3])
+                            setattr(models.storage.all()[key],
+                                    args[2], args[3])
                             models.storage.all()[key].save()
                         else:
                             print("** value missing **")

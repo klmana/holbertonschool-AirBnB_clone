@@ -16,8 +16,8 @@ from models.user import User
 classes = {"BaseModel": BaseModel, "State": State, "City": City,
            "Amenity": Amenity, "Place": Place, "Review": Review, "User": User}
 
-class FileStorage:
 
+class FileStorage:
     """
     That serializes instances to a JSON file
     and deserializes JSON file to instance
@@ -35,16 +35,16 @@ class FileStorage:
         """
         Sets in __objects the obj with key <obj class name>.id
         """
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        k = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[k] = obj
 
     def save(self):
         """
         Serialzes __objects to JSON file.
         """
         j_objects = {}
-        for key in self.__objects:
-            j_objects[key] = self.__objects[key].to_dict()
+        for k in self.__objects:
+            j_objects[k] = self.__objects[k].to_dict()
         with open(self.__file_path, "w", encoding="utf-8") as f:
             json.dump(j_objects, f)
 
@@ -54,6 +54,6 @@ class FileStorage:
         """
         if exists(self.__file_path):
             with open(self.__file_path, "r", encoding="utf-8") as f:
-                j_objects = json.load(f)
-                for key in j_objects:
-                    self.__objects[key] = classes[j_objects[key]["__class__"]](**j_objects[key])
+                j = json.load(f)
+                for k in j:
+                    self.__objects[k] = classes[j[k]["__class__"]](**j[k])
