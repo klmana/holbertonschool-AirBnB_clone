@@ -6,8 +6,6 @@ import unittest
 import datetime
 import uuid
 import inspect
-import models
-
 from models import base_model
 BaseModel = base_model.BaseModel
 
@@ -50,4 +48,41 @@ class TestDocsBaseModel(unittest.TestCase):
 
 class TestBaseModel(unittest.TestCase):
     """Tests class functionality."""
-# INCOMPLETE
+
+    @classmethod
+    def setUpClass(cls):
+        """
+        Initialisation for subsequent tests -
+        creating an instance of BaseModel class and two attributes
+        """
+        cls.inst = BaseModel()
+        cls.inst.height = 179
+        cls.inst.street = 'Gloucester'
+
+    def test_init(self):
+        """Testing that __init__ functions correctly"""
+        self.assertEqual(self.inst.height, 179)
+        self.assertTrue(isinstance(self.inst, BaseModel))
+
+    def test_str(self):
+        """Testing that __str__ functions correctly"""
+        test_string = f"[BaseModel] ({self.inst.id}) {self.inst.__dict__}"
+        self.assertEqual(str(self.inst), test_string)
+
+    def test_save(self):
+        """Testing the save functions correctly"""
+        old_updated = self.inst.updated_at
+        old_created = self.inst.created_at
+        self.inst.save()
+        new_updated = self.inst.updated_at
+        new_created = self.inst.created_at
+        self.assertEqual(old_created, new_created)
+        self.assertNotEqual(old_updated, new_updated)
+
+    def test_to_dict(self):
+        """Testing that to_dict functions correctly"""
+        test_dict = self.inst.to_dict()
+        self.assertTrue(isinstance(test_dict, dict))
+        self.assertEqual(test_dict["id"], self.inst.id)
+        self.assertEqual(test_dict["updated_at"],
+                         self.inst.updated_at.isoformat())
