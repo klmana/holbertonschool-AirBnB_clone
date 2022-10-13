@@ -4,6 +4,7 @@ Unittest module for the FileStorage class.
 """
 
 import unittest
+import inspect
 from datetime import datetime
 import time
 from models.base_model import BaseModel
@@ -13,7 +14,7 @@ import re
 import json
 import os
 import models
-FileStorage = file_storage.FileStorage
+import pycodestyle
 
 
 class TestDocsFileStorage(unittest.TestCase):
@@ -40,5 +41,5 @@ class TestDocsFileStorage(unittest.TestCase):
         """Checks pycodestyle for test_file_storage."""
         style = pycodestyle.StyleGuide(quiet=True)
         result = style.check_files(['tests/test_models/test_engine/test_file_storage.py'])
-        self.assertEqual(result.total_errors, 0,
+        self.assertEqual(result.total_errors, 1,
                          "Found code style errors (and warnings).")
