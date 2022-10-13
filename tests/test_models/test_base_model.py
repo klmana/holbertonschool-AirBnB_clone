@@ -11,35 +11,35 @@ BaseModel = base_model.BaseModel
 
 
 class TestDocsBaseModel(unittest.TestCase):
-    """Tests for presence of BaseModel class documentation."""
+    """Tests for presence of BaseModel class documentation"""
 
     @classmethod
     def setUpClass(cls):
-        """Easy access to all functions."""
+        """Easy access to all BaseModel functions"""
         cls.base_funcs = inspect.getmembers(BaseModel, inspect.isfunction)
 
     def test_module_docstring(self):
-        """Tests for the presence of module documentation."""
+        """Tests for presence of module documentation"""
         self.assertTrue(len(base_model.__doc__) >= 1)
 
     def test_class_docstring(self):
-        """Tests for the presence of BaseModel class documentation."""
+        """Tests for presence of BaseModel class documentation"""
         self.assertTrue(len(BaseModel.__doc__) >= 1)
 
     def test_func_docstrings(self):
-        """Tests for the presence of docstrings in all functions."""
+        """Tests for presence of documentation in all functions"""
         for func in self.base_funcs:
             self.assertTrue(len(func[1].__doc__) >= 1)
 
     def test_pycode_class(self):
-        """Checks pycodestyle for base."""
+        """Checks that base_model complies with PEP 8 style"""
         style = pycodestyle.StyleGuide(quiet=True)
         result = style.check_files(['models/base_model.py'])
         self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
     def test_pycode_test(self):
-        """Checks pycodestyle for test_base."""
+        """Checks that test_base_model complies with PEP 8 style"""
         style = pycodestyle.StyleGuide(quiet=True)
         result = style.check_files(['tests/test_models/test_base_model.py'])
         self.assertEqual(result.total_errors, 0,
@@ -47,7 +47,7 @@ class TestDocsBaseModel(unittest.TestCase):
 
 
 class TestBaseModel(unittest.TestCase):
-    """Tests class functionality."""
+    """Tests functionality of BaseModel class"""
 
     @classmethod
     def setUpClass(cls):
@@ -63,6 +63,7 @@ class TestBaseModel(unittest.TestCase):
         """Testing that __init__ functions correctly"""
         self.assertEqual(self.inst.height, 179)
         self.assertTrue(isinstance(self.inst, BaseModel))
+        self.assertTrue(BaseModel(id="Testing").id, "Testing")
 
     def test_str(self):
         """Testing that __str__ functions correctly"""
