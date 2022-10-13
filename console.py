@@ -8,6 +8,7 @@ Contains the entry point of the command interpreter.
 import cmd
 import sys
 import models
+import shlex
 from models.base_model import BaseModel
 from models.state import State
 from models.city import City
@@ -39,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel."""
-        args = arg.split()
+        args = shlex.split(arg)
         if len(args) == 0:
             print("** class name missing **")
             return False
@@ -56,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
         Prints the string representation of an instance
         based on the class name and id.
         """
-        args = arg.split()
+        args = shlex.split(arg)
         if len(args) == 0:
             print("** class name missing **")
             return False
@@ -81,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
         class name and id, with changes saved
         to JSON file.
         """
-        args = arg.split()
+        args = shlex.split(arg)
         if len(args) == 0:
             print("** class name missing **")
             return False
@@ -106,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representations of instances
         """
         o_list = []
-        args = arg.split()
+        args = shlex.split(arg)
         if len(args) == 0:
             for key in models.storage.all():
                 o_list.append(str(models.storage.all()[key]))
@@ -121,32 +122,28 @@ class HBNBCommand(cmd.Cmd):
                 return False
 
     def do_update(self, arg):
-        """
-        Updates an instance
-        """
-        args = arg.split()
+        """Update an instance based on the class name, id, attribute & value"""
+        args = shlex.split(arg)
         if len(args) == 0:
             print("** class name missing **")
-            return False
-        if args[0] not in classes:
-            print("** class doesn't exist **")
-            return False
-        if len(args) == 1:
-            print("** instance id missing **")
-            return False
-        if len(args) == 2:
-            print("** attribute name missing **")
-            return False
-        if len(args) == 3:
-            print("** value missing **")
-            return False
-        key = args[0] + "." + args[1]
-        if key in models.storage.all():
-            setattr(models.storage.all()[key], arg[2], arg[3])
-            models.storage.all()[key].save()
+        elif args[0] in classes:
+            if len(args) > 1:
+                key = args[0] + "." + args[1]
+                if key in models.storage.all():
+                    if len(args) > 2:
+                        if len(args) > 3:
+                            setattr(models.storage.all()[key], args[2], args[3])
+                            models.storage.all()[key].save()
+                        else:
+                            print("** value missing **")
+                    else:
+                        print("** attribute name missing **")
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
         else:
-            print("** no instance found **")
-            return False
+            print("** class doesn't exist **")
 
 
 if __name__ == '__main__':
