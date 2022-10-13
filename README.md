@@ -73,5 +73,5 @@ No known bugs at this time.
 
 ## Authors
 Hamish ROSS - [Github](https://github.com/Gotmished)  
-Gem PHAN - [Github](https://github.com/RainInApril)
+Gem PHAN - [Github](https://github.com/RainInApril)   
 Karren NONYTA - [Github](https://github.com/klmana)
