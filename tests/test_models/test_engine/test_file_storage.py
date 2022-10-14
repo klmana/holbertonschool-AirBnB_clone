@@ -58,7 +58,7 @@ class TestFileStorage(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         """
-        Creating an instance for use in tests
+        Creating an instance of FileStorage() for use in tests
         (storage = FileStorage() in another init file)
         """
         cls.inst = storage
@@ -71,22 +71,29 @@ class TestFileStorage(unittest.TestCase):
 
     def test_new(self):
         """Testing functionality of new"""
-        for value in self.inst.all().values():
-            test_value = value
-        self.assertEqual(test_value, value)
+        test_model = BaseModel()
+        test_model.street = "Gloucester"
+        test_model.name = "Hamish Ross"
+        test_model.id = '838383'
+        self.inst.new(test_model)
+        test_values = self.inst.all()
+        key = "{}.{}".format(test_model.__class__.__name__, test_model.id)
+        self.assertIsNotNone(test_values[key])
 
     def test_save(self):
         """Testing functionality of save"""
-        os.remove("file.json")
+        if os.path.exists("file.json"):
+            os.remove("file.json")
         self.inst.save()
         self.assertTrue(os.path.isfile("file.json"))
         self.assertNotEqual(os.path.getsize("file.json"), 0)
 
     def test_reload(self):
         """Testing functionality of reload"""
-        os.remove("file.json")
+        if os.path.exists("file.json"):
+            os.remove("file.json")
         self.inst.save()
-        with open("file.json", "r") as f:
-            before_reload = f.read()
+        FileStorage._FileStorage__objects = {}
+        self.assertEqual(storage.all(), {})
         self.inst.reload()
-        self.assertNotEqual(before_reload, self.inst._FileStorage__objects)
+        self.assertIsNotNone(self.inst._FileStorage__objects)
